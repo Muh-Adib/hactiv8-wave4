@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini API Playground 🚀</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --container-bg: rgba(30, 41, 59, 0.7);
+            --primary: #ec4899;
+            --secondary: #8b5cf6;
+            --text-light: #f8fafc;
+            --text-muted: #cbd5e1;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--bg-color), #1e1b4b);
+            color: var(--text-light);
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: var(--container-bg);
+            backdrop-filter: blur(16px);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            font-weight: 700;
+            margin-top: 0;
+            font-size: 2.5rem;
+            background: -webkit-linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        input[type="text"], input[type="file"], select {
+            width: 100%;
+            padding: 0.875rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            outline: none;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+
+        input[type="text"]:focus, select:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3);
+        }
+
+        select {
+            appearance: none;
+            cursor: pointer;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1em;
+        }
+
+        select option {
+            background-color: var(--bg-color);
+            color: var(--text-light);
+        }
+
+        button {
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+            box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px rgba(236, 72, 153, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .output-wrapper {
+            margin-top: 2.5rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease;
+        }
+
+        .output-wrapper.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .output {
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            font-size: 1rem;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            min-height: 100px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .loading {
+            display: none;
+            margin-top: 2rem;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            font-weight: 500;
+            color: var(--secondary);
+        }
+
+        .loader {
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .file-inputs {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.2);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.2);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Gemini AI 🚀</h1>
+        
+        <form id="ai-form">
+            <div class="form-group">
+                <label for="endpoint">Pilih Kemampuan AI</label>
+                <select id="endpoint" onchange="toggleInputs()">
+                    <option value="/generate-from-text">Teks saja (Chat Generatif)</option>
+                    <option value="/generate-from-image">Deteksi Gambar (Vision)</option>
+                    <option value="/generate-from-document">Analisis Dokumen (PDF)</option>
+                    <option value="/generate-from-audio">Transkripsi Audio</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="prompt">Prompt / Instruksi</label>
+                <input type="text" id="prompt" placeholder="Contoh: Jelaskan AI dalam 2 kalimat..." required>
+            </div>
+
+            <div class="form-group file-inputs" id="file-input-group">
+                <label id="file-label" for="file">Unggah File</label>
+                <input type="file" id="file" name="file">
+            </div>
+
+            <button type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                Generate Response
+            </button>
+        </form>
+
+        <div class="loading" id="loading">
+            <div class="loader"></div>
+            <span>AI Sedang Berpikir...</span>
+        </div>
+
+        <div class="output-wrapper" id="output-wrapper">
+            <div class="output-header">
+                <h3>Hasil Generasi:</h3>
+                <span class="badge" id="model-badge">gemini-2.5-flash</span>
+            </div>
+            <div class="output" id="output">Hasil akan muncul di sini...</div>
+        </div>
+    </div>
+
+    <script>
+        function toggleInputs() {
+            const endpoint = document.getElementById('endpoint').value;
+            const fileGroup = document.getElementById('file-input-group');
+            const fileLabel = document.getElementById('file-label');
+            const fileInput = document.getElementById('file');
+            const promptInput = document.getElementById('prompt');
+
+            fileGroup.style.display = 'block';
+
+            if (endpoint === '/generate-from-text') {
+                fileGroup.style.display = 'none';
+                fileInput.value = '';
+                promptInput.required = true;
+                promptInput.placeholder = "Contoh: Jelaskan AI dalam 2 kalimat...";
+            } else if (endpoint === '/generate-from-image') {
+                fileLabel.innerText = "Unggah Gambar (JPG/PNG)";
+                fileInput.accept = "image/png, image/jpeg, image/webp, image/heic, image/heif";
+                promptInput.required = false;
+                promptInput.placeholder = "(Opsional) Contoh: Apa isi gambar ini?";
+            } else if (endpoint === '/generate-from-document') {
+                fileLabel.innerText = "Unggah Dokumen (PDF)";
+                fileInput.accept = "application/pdf";
+                promptInput.required = false;
+                promptInput.placeholder = "(Opsional) Contoh: Buatkan ringkasan dari dokumen ini";
+            } else if (endpoint === '/generate-from-audio') {
+                fileLabel.innerText = "Unggah Audio (MP3/WAV)";
+                fileInput.accept = "audio/mp3, audio/wav, audio/mpeg, audio/ogg";
+                promptInput.required = false;
+                promptInput.placeholder = "(Opsional) Contoh: Tolong buatkan transkrip audio ini";
+            }
+        }
+
+        document.getElementById('ai-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const endpoint = document.getElementById('endpoint').value;
+            const prompt = document.getElementById('prompt').value;
+            const fileInput = document.getElementById('file');
+            
+            const loading = document.getElementById('loading');
+            const outputWrapper = document.getElementById('output-wrapper');
+            const output = document.getElementById('output');
+
+            // Reset UI
+            outputWrapper.classList.remove('visible');
+            loading.style.display = 'flex';
+            output.innerText = '';
+            output.style.color = 'var(--text-light)';
+
+            try {
+                let response;
+
+                if (endpoint === '/generate-from-text') {
+                    response = await fetch(endpoint, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ prompt })
+                    });
+                } else {
+                    const formData = new FormData();
+                    if (prompt) formData.append('prompt', prompt);
+                    
+                    if (fileInput.files.length > 0) {
+                        const fieldName = endpoint.split('-').pop(); // gets 'image', 'document', or 'audio'
+                        formData.append(fieldName, fileInput.files[0]);
+                    }
+
+                    response = await fetch(endpoint, {
+                        method: 'POST',
+                        body: formData
+                    });
+                }
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.message || data.error || 'Terjadi kesalahan pada server');
+                }
+
+                output.innerText = data.response;
+            } catch (error) {
+                output.style.color = '#ef4444'; // Red color for error
+                output.innerText = 'Error:\n' + error.message;
+            } finally {
+                loading.style.display = 'none';
+                outputWrapper.classList.add('visible');
+            }
+        });
+
+        // Initialize state
+        toggleInputs();
+    </script>
+</body>
+</html>
