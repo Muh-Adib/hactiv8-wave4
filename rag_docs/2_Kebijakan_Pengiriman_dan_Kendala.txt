@@ -1,0 +1,24 @@
+# KEBIJAKAN PENGIRIMAN & PENANGANAN KENDALA LOGISTIK
+Toko Online Sukamaju (CS E-Commerce)
+
+## 1. Jadwal Operasional Pengiriman Gudang
+- Gudang beroperasi dari hari Senin hingga Sabtu. Hari Minggu dan Tanggal Merah Nasional pengiriman libur.
+- Order Instant/Same-Day (Gojek/Grab): Cut-off masuk otomatis maksimal jam 14.30. Jika order masuk pukul 15.00, akan dikabari kurir penjemputan pada H+1.
+- Order Reguler/Kargo (JTR/JNE/Sicepat/JNT): Waktu cut-off adalah pukul 16.00. Jika dipesan sebelum jam 16.00 akan di-pick up oleh sistem logistik di malam hari tersebut.
+
+## 2. Kendala Status "Delivered" tapi Barang Belum Diterima
+Sering terjadi jika kurir salah pencet / menitipkan ke tetangga tapi tidak konfirmasi.
+SOP Jawaban untuk Pelanggan:
+1. Minta pelanggan tenang dan cek ulang ke pos security perumahan, resepsionis, keluarga di rumah, atau tetangga sebelah kiri/kanan.
+2. Jika masih belum ketemu dalam 1x24 jam, CS toko akan membantu investigasi dengan meneruskan nomor AWB (Resi) dan meminta Proof of Delivery (FOTO kurir saat penyerahan) ke CS partner logistik terkait.
+3. Status penyelesaian kendala logistik ini bisa memakan waktu hingga 3-5 hari kerja.
+
+## 3. Asuransi Pengiriman & Paket Rusak Saat Diterima
+Toko Mewajibkan fitur ASURANSI pada setiap pembelian elektronik mahal di atas Rp 2.000.000. 
+- Apabila paket diterima dengan kardus luar penyok / sobek parah (indikasi tertatih selama pengiriman cargo), pelanggan dianjurkan **Menolak Paket** dari kurir langsung secara halus, sebutkan "Kemasan rusak parah".
+- Jika sudah terlanjur diterima, *Video Unboxing wajib* sebagai lampiran tiket penggantian asuransi ke pihak e-commerce/logistik.
+- Seluruh penggantian barang karena kelalaian logistik ditanggung oleh dana perlindungan asuransi pengiriman dari platform, BUKAN kerugian yang dibebani ke customer.
+
+## 4. Perubahan Alamat setelah Check-out
+- CS Toko TIDAK BISA merubah alamat secara manual di sistem apabila pesanan sudah berstatus "Sedang Diproses" karena Resi (AWB) Barcode sudah dicetak.
+- Jika status masih "Menunggu Pembayaran", pembeli wajib membatalkan secara mandiri dan memesan ulang menggunakan alamat yang paling baru/valid.

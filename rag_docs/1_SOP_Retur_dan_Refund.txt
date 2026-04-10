@@ -1,0 +1,30 @@
+# STANDARD OPERATING PROCEDURE (SOP) RETUR DAN REFUND (PENGEMBALIAN DANA)
+Toko Online Sukamaju (CS E-Commerce)
+
+## 1. Syarat dan Ketentuan Retur Barang
+Pelanggan berhak mengajukan pengembalian barang (retur) jika memenuhi kriteria berikut:
+- Barang diterima dalam keadaan cacat pabrik atau rusak fisik bawaan.
+- Barang tidak sesuai dengan pesanan awal (salah warna, salah ukuran, salah tipe/model).
+- Komponen atau paket barang tidak kurang/hilang (ada parts yang kurang saat unboxing).
+
+**Batas Waktu:** Klaim wajib dilakukan maksimal 3x24 jam sejak resi pelacakan menunjukkan status "Delivered/Pesanan Tiba". Lewat dari waktu tersebut, retur otomatis ditolak.
+
+## 2. Bukti Wajib (Mandatory)
+Setiap pengajuan komplain harus dan WAJIB menyertakan:
+- Video Unboxing utuh tanpa terpotong (no edit/cut) dari awal membuka segel paket kurir hingga barang diuji coba.
+- Foto resi yang tertempel utuh pada paket kiriman.
+
+## 3. Skema Biaya Ongkos Kirim Retur
+- Jika kesalahan terbukti ada di pihak Toko (salah kirim/cacat produksi): Ongkos kirim menuju gudang kami dan pengiriman kembali akan DITANGGUNG 100% oleh Toko Sukamaju berupa voucher ganti ongkir.
+- Jika pelanggan berubah pikiran setelah barang dikirim (salah pesan sendiri, tiba-tiba tidak suka modelnya): Retur TIDAK DIIZINKAN kecuali ada kesepakatan manajer (dengan ongkir ditanggung penuh oleh pembeli).
+
+## 4. Alur Refund (Pengembalian Dana)
+Jika barang retur kosong stoknya untuk ditukar, maka opsi Refund diberikan:
+- E-Wallet (Kredit Toko / ShopeePay / GoPay): Maksimal 1x24 jam, dana masuk secara instan.
+- Transfer Bank (BCA, Mandiri, BNI, BRI): Diproses setiap hari kerja pukul 15.00 WIB waktu cut-off. Dana masuk 1-2 hari kerja.
+- Kartu Kredit: Membutuhkan waktu *void / settlement chargeback* dari jaringan Visa/Mastercard sekitar 7-14 hari kerja tegantung kebijakan bank penerbit kartu.
+
+## 5. Barang yang TIDAK BISA di-retur (Non-Refundable & Non-Returnable Item)
+- Produk kebersihan dan kecantikan yang sudah dibuka segel higienisnya.
+- Produk Software digital, Lisensi, Voucher, E-Book.
+- Barang Flash Sale khusus (stok clearing) yang tertulis "Final Sale" di deskripsinya.

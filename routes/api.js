@@ -16,7 +16,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 // ===================================================
 let chatbotSettings = {
     brandVoice: "Anda adalah asisten virtual profesional. Bantulah dengan bahasa yang baik dan format Markdown.",
-    useWebSearch: true,
+    useWebSearch: false,
     activeDocument: null, // { name, chunks, uploadedAt }
     activeDomain: 'ecommerce'
 };

@@ -7,9 +7,33 @@ let conversation = [];
 
 // Konfigurasi aktif yang sinkron dengan server
 let currentConfig = {
-    useWebSearch: true,
+    useWebSearch: false, // Default diubah menjadi OFF untuk mode e-commerce
     activeDocument: null,
-    activeDomain: 'ecommerce'
+    activeDomain: 'ecommerce' // Default ke ecommerce
+};
+
+// ===================================================
+// ONBOARDING TUTORIAL LOGIC
+// ===================================================
+document.addEventListener('DOMContentLoaded', () => {
+    const hasSeenTutorial = localStorage.getItem('onboarding_done');
+    if (!hasSeenTutorial) {
+        document.getElementById('onboarding-overlay').style.display = 'flex';
+    }
+});
+
+window.nextStep = function(stepObj) {
+    document.querySelectorAll('.onboarding-step').forEach(el => el.style.display = 'none');
+    document.getElementById(`step-${stepObj}`).style.display = 'block';
+};
+
+window.skipTutorial = function() {
+    document.getElementById('onboarding-overlay').style.display = 'none';
+    localStorage.setItem('onboarding_done', 'true');
+    // Jika user berada di sini untuk pertama kali, beri sapaan awal
+    if (chatBox.children.length === 0) {
+        initApp();
+    }
 };
 
 // ===================================================
@@ -144,7 +168,7 @@ function appendMessage(role, text, id = null) {
     if (role === 'user') {
         bubble.innerHTML = DOMPurify.sanitize(text);
     } else if (role === 'system') {
-        bubble.textContent = text; // System messages: plain text saja
+        bubble.innerHTML = text; // System messages: aman langsung dari script
     } else {
         bubble.innerHTML = renderMarkdown(text);
     }
@@ -233,7 +257,7 @@ clearChatBtn.addEventListener('click', () => {
     
     conversation = [];
     chatBox.innerHTML = '';
-    appendMessage('system', '🧹 Percakapan telah dibersihkan. Mulai topik baru!');
+    appendMessage('system', '<i class="fas fa-broom"></i> Percakapan telah dibersihkan. Mulai topik baru!');
 });
 
 // ===================================================
@@ -318,11 +342,11 @@ settingsForm.addEventListener('submit', async (e) => {
             'restoran': 'Restoran',
             'perbankan': 'Perbankan'
         };
-        const modeLabel = useWebSearch ? '🌐 Web Search' : `🛠️ Skill Mode (${domainLabels[currentConfig.activeDomain]})`;
+        const modeLabel = useWebSearch ? '<i class="fas fa-globe"></i> Web Search' : `<i class="fas fa-tools"></i> Skill Mode (${domainLabels[currentConfig.activeDomain]})`;
         const docLabel = currentConfig.activeDocument 
-            ? `📄 Dokumen: ${currentConfig.activeDocument.name}` 
+            ? `<i class="fas fa-file-alt"></i> Dokumen: ${currentConfig.activeDocument.name}` 
             : '';
-        appendMessage('system', `Konfigurasi diperbarui — Mode: ${modeLabel}${docLabel ? ' | ' + docLabel : ''}`);
+        appendMessage('system', `<i class="fas fa-info-circle"></i> Konfigurasi diperbarui &mdash; Mode: ${modeLabel}${docLabel ? ' | ' + docLabel : ''}`);
 
         settingsStatus.style.color = '#10b981';
         settingsStatus.innerText = data.message || '✅ Konfigurasi berhasil diterapkan!';
@@ -343,24 +367,29 @@ settingsForm.addEventListener('submit', async (e) => {
 });
 
 // ===================================================
-// INIT: Jalankan saat halaman pertama load
+// INIT: Memulai sapaan awal
 // ===================================================
 async function initApp() {
     // 1. Sinkronisasi config dari server
     await syncConfigFromServer();
 
-    // 2. Tampilkan pesan sambutan
-    const welcomeText = `Halo! 👋 Selamat datang di **AI Customer Service Enterprise**.
+    // 2. Cek apakah tutorial onboarding sudah selesai
+    const hasSeenTutorial = localStorage.getItem('onboarding_done');
+    if (hasSeenTutorial && chatBox.children.length === 0) {
+        // Tampilkan pesan sambutan
+        const welcomeText = `Halo! <i class="fas fa-hand-sparkles" style="color:var(--primary)"></i> Selamat datang di **AI Customer Service Enterprise**.
 
 Saya siap membantu Anda. Beberapa hal yang bisa saya lakukan:
 
-- 🌐 **Web Search ON** → Saya bisa mencari informasi terkini dari internet
-- 🛠️ **Skill Mode** *(toggle Web Search OFF)* → Saya bisa cek stok barang, tarif kargo, lokasi gudang
-- 📄 **Upload Dokumen** → Upload SOP atau referensi bisnis Anda agar jawaban saya lebih akurat
+- <i class="fas fa-globe"></i> **Web Search ON** → Saya bisa mencari informasi terkini dari internet
+- <i class="fas fa-tools"></i> **Skill Mode** *(toggle Web Search OFF)* → Saya bisa cek stok barang, tarif kargo, lokasi gudang
+- <i class="fas fa-file-alt"></i> **Upload Dokumen** → Upload SOP atau referensi bisnis Anda agar jawaban saya lebih akurat
 
-Klik ⚙️ di kanan bawah untuk mengatur kepribadian dan mode saya. Ada yang bisa dibantu?`;
+Klik <i class="fas fa-cog"></i> di kanan bawah untuk mengatur kepribadian dan mode saya. Ada yang bisa dibantu?`;
 
-    appendMessage('model', welcomeText);
+        appendMessage('model', welcomeText);
+    }
 }
 
+// Terus jalankan inisialisasi awal, sapaan akan dipending oleh initApp jika onboarding aktif
 initApp();

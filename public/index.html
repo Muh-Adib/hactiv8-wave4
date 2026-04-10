@@ -24,6 +24,34 @@
     <i class="fas fa-cog"></i>
   </button>
 
+  <!-- Onboarding Tutorial Overlay -->
+  <div id="onboarding-overlay" class="onboarding-overlay" style="display: none;">
+    <div class="onboarding-content">
+      <div class="onboarding-step" id="step-1">
+        <h3><i class="fas fa-hand-sparkles"></i> Selamat Datang!</h3>
+        <p>Aplikasi Chatbot ini memiliki 2 mode canggih:</p>
+        <ul>
+          <li><i class="fas fa-globe"></i> <strong>Web Search:</strong> AI mencari jawaban bebas dari internet secara real-time.</li>
+          <li><i class="fas fa-tools"></i> <strong>Skill Mode:</strong> AI memanggil <i>Function internal</i> (seperti cek stok & harga) menggunakan API.</li>
+        </ul>
+        <button class="btn btn-primary" onclick="nextStep(2)">Lanjut <i class="fas fa-arrow-right"></i></button>
+        <button class="btn btn-cancel" onclick="skipTutorial()">Lewati (Skip)</button>
+      </div>
+      <div class="onboarding-step" id="step-2" style="display: none;">
+        <h3><i class="fas fa-file-alt"></i> Analisis Dokumen Pintar (RAG)</h3>
+        <p>Anda bisa mengatur *"Kepribadian"* AI dan mengunggah dokumen <strong>PDF/TXT</strong> di panel pengaturan pojok kanan bawah <i class="fas fa-cog"></i>.</p>
+        <p>AI akan otomatis menggunakan dokumen Anda sebagai referensi (RAG).</p>
+        <button class="btn btn-primary" onclick="nextStep(3)">Lanjut <i class="fas fa-arrow-right"></i></button>
+        <button class="btn btn-cancel" onclick="skipTutorial()">Lewati</button>
+      </div>
+      <div class="onboarding-step" id="step-3" style="display: none;">
+        <h3><i class="fas fa-rocket"></i> Siap Digunakan!</h3>
+        <p>Secara <i>default</i>, Chatbot berada di Mode Skill (E-Commerce). Cobalah bertanya: <strong>"Berapa harga stok iPhone 15?"</strong></p>
+        <button class="btn btn-primary" onclick="skipTutorial()">Mulai Chatting! <i class="fas fa-check"></i></button>
+      </div>
+    </div>
+  </div>
+
   <div class="container">
     <header class="chat-header">
       <!-- Kiri: Info bot -->
@@ -72,9 +100,10 @@
         <div class="form-group">
           <label for="brand-voice-preset">Template Kepribadian (Brand Voice):</label>
           <select id="brand-voice-preset">
-            <option value="Anda adalah CS E-Commerce yang ramah, sopan, dan solutif. Anda harus mengeksekusi Cek Stok jika perlu. Gunakan emoticon dan format Markdown yang rapi.">CS E-Commerce (Ramah &amp; Hangat)</option>
-            <option value="Anda adalah Customer Service Kargo dan Ekspedisi JNT/JNE. Gaya bahasa tugas, informatif, dan jelas. Selalu berikan opsi jalur rute dan estimasi hari secara transparan mengacu pada database Rute Kargo Anda.">CS Kargo/Ekspedisi (Tegas &amp; Jelas)</option>
-            <option value="Anda adalah Sales Eksekutif B2B. Sangat formal, sopan, menggunakan kalimat baku tanpa basa-basi berlebih.">Sales B2B (Super Formal)</option>
+            <option value="Anda adalah CS E-Commerce. CS ramah & solutif. Menggunakan pendekatan *soft-selling* yang empatik untuk mengubah rasa ingin tahu pelanggan menjadi kebutuhan mendesak secara halus. Anda harus mengeksekusi Cek Stok atau Buat Pesanan jika relevan.">CS E-Commerce (Soft-Selling &amp; Empatik)</option>
+            <option value="Anda adalah CS Kargo & Ekspedisi. Jawablah status pengiriman, ongkir, dan rute secara informatif, transparan, dan dapat diandalkan. Periksa resi dan estimasi harga secara akurat.">CS Kargo/Ekspedisi (Informatif &amp; Jelas)</option>
+            <option value="Anda adalah CS Perbankan. Gunakan bahasa yang profesional, sangat menjaga privasi keamanan nasabah, dan berikan panduan mutasi atau cek saldo secara terstruktur dan hati-hati.">CS Perbankan (Profesional &amp; Aman)</option>
+            <option value="Anda adalah CS Restoran & Kafe. Bersikaplah hangat, merekomendasikan menu dengan deskripsi yang menggugah selera, dan pandu proses reservasi meja atau pesanan dengan efisien.">CS Restoran (Hangat &amp; Menggugah Selera)</option>
             <option value="custom">-- Tulis Custom Prompt Sendiri --</option>
           </select>
         </div>

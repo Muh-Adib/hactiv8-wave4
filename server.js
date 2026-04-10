@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 // Serve frontend statis (index.html, script.js, style.css)
-app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Bootloader Engine
 async function bootSistem() {
@@ -29,7 +29,7 @@ async function bootSistem() {
     // 3. Fallback: semua route non-API kembalikan index.html (SPA support)
     // Di Express 5, gunakan app.use sebagai penampung akhir tanpa router khusus.
     app.use((req, res) => {
-        res.sendFile(path.join(__dirname, 'index.html'));
+        res.sendFile(path.join(__dirname, 'public', 'index.html'));
     });
 
     // 4. Jalankan HTTP Server
