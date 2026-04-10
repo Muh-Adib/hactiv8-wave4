@@ -1,26 +1,26 @@
 [
     { 
         "id": "gemini-2.5-flash", 
-        "description": "Model Paling Pintar, Limit Rendah (20x/hari)",
+        "description": "Model Utama Premium",
+        "supportsSearch": true, 
+        "supportsTools": true 
+    },
+    { 
+        "id": "gemini-3-flash", 
+        "description": "Model Cadangan (Generasi 3)",
         "supportsSearch": true, 
         "supportsTools": true 
     },
     { 
         "id": "gemini-2.5-flash-lite", 
-        "description": "Model Cepat dan Lapang (500x/hari)",
+        "description": "Model Ringan & Cepat",
         "supportsSearch": true, 
         "supportsTools": true 
     },
     { 
-        "id": "gemini-1.5-flash", 
-        "description": "Model Backup Transisi Stabil",
+        "id": "gemini-3.1-flash-lite", 
+        "description": "Model Ringan Tercepat (Generasi 3.1)",
         "supportsSearch": true, 
         "supportsTools": true 
-    },
-    { 
-        "id": "gemma-4-26b", 
-        "description": "Model Open Source Kuota Dewa (1.500x/hari) - Tanpa Internet",
-        "supportsSearch": false, 
-        "supportsTools": false 
     }
 ]
