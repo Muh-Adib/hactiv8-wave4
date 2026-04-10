@@ -2,7 +2,7 @@
 
 **OmniDesk AI** adalah aplikasi chatbot tingkat lanjut berbasis Node.js dan Google Gemini AI. Chatbot ini dirancang secara modular dan khusus dengan arsitektur *Multi-Domain Skill* agar asisten virtual Anda dapat melakukan aksi pintar secara dinamis *(Function Calling)* seperti mengecek stok gudang, pendaftaran pesanan, tracking resi kargo, dan reservasi meja restoran langsung dari prompt bahasa natural.
 
-Dibuat secara komprehensif oleh **Muh. Adib (Hacktiv8 Wave 4)** dalam rangka eksplorasi mendalam terkait agen AI modular (*Agentic Framework*).
+Dibuat secara komprehensif oleh **Muh. Adib Auila Hanif (Hacktiv8 Wave 4 [IT] Batch 11 - Susianti Amelia)** dalam rangka eksplorasi mendalam terkait agen AI modular (*Agentic Framework*).
 
 ---
 
@@ -58,7 +58,7 @@ Dibuat secara komprehensif oleh **Muh. Adib (Hacktiv8 Wave 4)** dalam rangka eks
 
 1. **Clone & Masuk ke Folder**
    ```bash
-   cd hactiv8
+   cd omnidesk-ai
    ```
 
 2. **Instal Dependensi**
@@ -117,4 +117,4 @@ Untuk mendemonstrasikan kecerdasan agen dalam membaca Dokumen Perusahaan (RAG), 
 ---
 
 💡 **Credit & Pemeliharaan**
-Dibangun dan dikelola oleh **Muh. Adib** (Hacktiv8 Indonesia Wave 4). Jika proyek ini dijalankan dalam mode production/komersial tinggi yang menggunakan *heavy function call arrays*, sangat disarankan untuk mengatur model berbayar di `models.json` atau berintegrasi ke sistem Database SQL persisten sesungguhnya!
+Dibangun dan dikelola oleh **Muh. Adib Aulia Hanif** (Hacktiv8 Indonesia Wave 4 [IT] Batch 11 - Susianti Amelia). Jika proyek ini dijalankan dalam mode production/komersial tinggi yang menggunakan *heavy function call arrays*, sangat disarankan untuk mengatur model berbayar di `models.json` atau berintegrasi ke sistem Database SQL persisten sesungguhnya!
