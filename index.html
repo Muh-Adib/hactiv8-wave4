@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CS AI Enterprise — Chatbot Modular</title>
+  <meta name="description" content="AI Customer Service Enterprise dengan RAG, Function Calling, dan Failover otomatis berbasis Google Gemini.">
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Inter Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- CDN untuk render Markdown ke HTML dan proteksi XSS -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  
+  <!-- Tombol Akses Settings (Floating) -->
+  <button id="settings-btn" class="settings-btn" title="Pengaturan AI">
+    <i class="fas fa-cog"></i>
+  </button>
+
+  <div class="container">
+    <header class="chat-header">
+      <!-- Kiri: Info bot -->
+      <div class="header-info">
+        <div class="avatar"><i class="fas fa-robot"></i></div>
+        <div>
+          <h2>AI Customer Support</h2>
+          <span class="status"><span class="dot"></span> Online</span>
+        </div>
+      </div>
+
+      <!-- Kanan: Badge mode + Badge dokumen + Tombol clear -->
+      <div class="header-actions">
+        <div id="mode-badge" class="mode-badge mode-websearch" title="Mode pencarian aktif">
+          <i class="fas fa-globe"></i>
+          <span id="mode-badge-text">Web Search</span>
+        </div>
+        <div id="doc-badge" class="doc-badge" title="Dokumen aktif sebagai basis pengetahuan" style="display:none;">
+          <i class="fas fa-file-alt"></i>
+          <span id="doc-badge-name">dokumen.txt</span>
+        </div>
+        <button id="clear-chat-btn" class="clear-btn" title="Bersihkan Chat">
+          <i class="fas fa-trash-alt"></i>
+        </button>
+      </div>
+    </header>
+
+    <div id="chat-box" class="chat-box"></div>
+
+    <form id="chat-form">
+      <input type="text" id="user-input" placeholder="Tanyakan sesuatu..." autocomplete="off" required />
+      <button type="submit" id="send-btn" title="Kirim"><i class="fas fa-paper-plane"></i></button>
+    </form>
+  </div>
+
+  <!-- Settings Modal -->
+  <div id="settings-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fas fa-sliders-h"></i> Konfigurasi AI</h3>
+        <button id="close-modal" class="close-btn"><i class="fas fa-times"></i></button>
+      </div>
+      
+      <form id="settings-form">
+        <!-- Preset Brand Voice -->
+        <div class="form-group">
+          <label for="brand-voice-preset">Template Kepribadian (Brand Voice):</label>
+          <select id="brand-voice-preset">
+            <option value="Anda adalah CS E-Commerce yang ramah, sopan, dan solutif. Anda harus mengeksekusi Cek Stok jika perlu. Gunakan emoticon dan format Markdown yang rapi.">CS E-Commerce (Ramah &amp; Hangat)</option>
+            <option value="Anda adalah Customer Service Kargo dan Ekspedisi JNT/JNE. Gaya bahasa tugas, informatif, dan jelas. Selalu berikan opsi jalur rute dan estimasi hari secara transparan mengacu pada database Rute Kargo Anda.">CS Kargo/Ekspedisi (Tegas &amp; Jelas)</option>
+            <option value="Anda adalah Sales Eksekutif B2B. Sangat formal, sopan, menggunakan kalimat baku tanpa basa-basi berlebih.">Sales B2B (Super Formal)</option>
+            <option value="custom">-- Tulis Custom Prompt Sendiri --</option>
+          </select>
+        </div>
+
+        <!-- Custom Prompt (hidden by default) -->
+        <div class="form-group" id="custom-prompt-container" style="display:none;">
+          <label for="system-prompt">Prompt Custom Manual:</label>
+          <textarea id="system-prompt" rows="3">Anda adalah asisten Customer Service yang ramah.</textarea>
+        </div>
+
+        <!-- Toggle Web Search -->
+        <div class="form-group toggle-group">
+          <label class="switch">
+            <input type="checkbox" id="use-web-search" checked>
+            <span class="slider round"></span>
+          </label>
+          <div class="toggle-info">
+            <span class="toggle-label">Izinkan AI Mencari via Google</span>
+            <p class="toggle-desc">Aktif = Web Search | Nonaktif = Mode Skill Internal</p>
+          </div>
+        </div>
+
+        <!-- Domain Keahlian (Active Domain) -->
+        <div class="form-group" id="domain-container">
+          <label for="active-domain">Domain Keahlian (Khusus Mode Skill):</label>
+          <select id="active-domain">
+            <option value="ecommerce">CS E-Commerce (Toko Online)</option>
+            <option value="kargo">CS Kargo &amp; Ekspedisi</option>
+            <option value="restoran">CS Restoran &amp; Kafe</option>
+            <option value="perbankan">CS Perbankan &amp; Keuangan</option>
+          </select>
+        </div>
+
+        <!-- Upload Dokumen RAG -->
+        <div class="form-group file-group">
+          <label for="knowledge-file">Upload Basis Pengetahuan (PDF/TXT):</label>
+          <p class="help-text">Dokumen ini akan dijadikan referensi jawaban AI secara hemat token (RAG).</p>
+          <input type="file" id="knowledge-file" accept=".pdf, .txt" />
+          <div id="current-doc-info" class="current-doc-info" style="display:none;">
+            <i class="fas fa-check-circle"></i>
+            <span id="current-doc-name"></span>
+            <span id="current-doc-chunks"></span>
+          </div>
+        </div>
+
+        <button type="submit" class="save-btn" id="save-settings-btn">
+          <span>Simpan &amp; Terapkan</span> 
+          <i class="fas fa-check"></i>
+        </button>
+        <p id="settings-status" class="settings-status"></p>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

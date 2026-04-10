@@ -1,0 +1,26 @@
+[
+    { 
+        "id": "gemini-2.5-flash", 
+        "description": "Model Paling Pintar, Limit Rendah (20x/hari)",
+        "supportsSearch": true, 
+        "supportsTools": true 
+    },
+    { 
+        "id": "gemini-2.5-flash-lite", 
+        "description": "Model Cepat dan Lapang (500x/hari)",
+        "supportsSearch": true, 
+        "supportsTools": true 
+    },
+    { 
+        "id": "gemini-1.5-flash", 
+        "description": "Model Backup Transisi Stabil",
+        "supportsSearch": true, 
+        "supportsTools": true 
+    },
+    { 
+        "id": "gemma-4-26b", 
+        "description": "Model Open Source Kuota Dewa (1.500x/hari) - Tanpa Internet",
+        "supportsSearch": false, 
+        "supportsTools": false 
+    }
+]

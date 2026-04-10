@@ -1,0 +1,15 @@
+[36m[INFO][0m Memulai Aplikasi Server Chatbot CS Enterprise... 
+[32m[SUCCESS][0m Plugin "ecommerce.js" (Domain: ecommerce) berhasil dimuat.
+[32m[SUCCESS][0m Plugin "kargo.js" (Domain: kargo) berhasil dimuat.
+[32m[SUCCESS][0m Plugin "perbangkan.js" (Domain: perbankan) berhasil dimuat.
+[32m[SUCCESS][0m Plugin "restoran.js" (Domain: restoran) berhasil dimuat.
+[32m[SUCCESS][0m Skill Loader selesai: 4 berhasil, 0 gagal.
+[36m[INFO][0m Domain aktif dalam memori: ecommerce, kargo, perbankan, restoran 
+[32m[SUCCESS][0m Sistem Utama Berjalan pada http://localhost:3000
+[36m[INFO][0m Frontend: buka http://localhost:3000 di browser 
+[36m[INFO][0m Mencoba Model => gemini-2.5-flash (depth: 0) 
+[36m[INFO][0m AI memanggil skill: "cek_tarif_kargo" (Domain: kargo) {"jenis_kargo":"motor","kota_tujuan":"Jakarta","kota_asal":"Jogja"}
+[36m[INFO][0m [Kargo Skill] "Tarif: Jogja → Jakarta (motor)"
+[36m[INFO][0m Skill "cek_tarif_kargo" selesai dieksekusi — hasilnya dikirim balik ke AI. 
+[36m[INFO][0m Isi contents sebelum rekursi: "[\n  {\n    \"role\": \"user\",\n    \"parts\": [\n      {\n        \"text\": \"berapa ongkir motor dari jogja ke jakarta\"\n      }\n    ]\n  },\n  {\n    \"parts\": [\n      {\n        \"functionCall\": {\n          \"name\": \"cek_tarif_kargo\",\n          \"args\": {\n            \"jenis_kargo\": \"motor\",\n            \"kota_tujuan\": \"Jakarta\",\n            \"kota_asal\": \"Jogja\"\n          }\n        },\n        \"thoughtSignature\": \"Cp0CAb4+9vu6DpeJenLLWRRvwsKCQARWO3gN0Mwv1g0t4jOhqiR2EBnWxb1XUXP2sxOPYRhBsozhAS9L+z7NDQR4r08dO6CdxXw310Kf05FUglsdaAJzNufWNfKkr8gmYci6DNVCfXmUXsvrNrAq/JJ9sCRu5/5fW1n9SubV0lPltRy3gPcIxnh10mn+/cYNdVPXVne2iNKiDRqKHwcTixHNaHrhWQ5Fm0F6yVCu3quyrEKVs2Fehp8a5RGUHQ1LOLvjQYrCL+3l12Oh152YJ2dYgPak2ujOaz+wvMqMYlUMoi7hsWxmTEoqvJh/75UEh+3ijbuWDX0PMmrZpBy2Su/BAWyRylDtezE0+r0vs29WnRzkOy+YGqge4+9sta/K\"\n      }\n    ],\n    \"role\": \"model\"\n  },\n  {\n    \"role\": \"user\",\n    \"parts\": [\n      {\n        \"functionResponse\": {\n          \"name\": \"cek_tarif_kargo\",\n          \"response\": {\n            \"tersedia\": true,\n            \"asal\": \"Jogja\",\n            \"tujuan\": \"Jakarta\",\n            \"jenis_kargo\": \"motor\",\n            \"harga\": 850000,\n            \"harga_format\": \"Rp 850.000\",\n            \"estimasi\": \"2-3 hari\",\n            \"jalur\": \"Jalur Pantura\"\n          }\n        }\n      }\n    ]\n  }\n]"
+[36m[INFO][0m Mencoba Model => gemini-2.5-flash (depth: 1) 
