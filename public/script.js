@@ -377,7 +377,7 @@ async function initApp() {
     const hasSeenTutorial = localStorage.getItem('onboarding_done');
     if (hasSeenTutorial && chatBox.children.length === 0) {
         // Tampilkan pesan sambutan
-        const welcomeText = `Halo! <i class="fas fa-hand-sparkles" style="color:var(--primary)"></i> Selamat datang di **AI Customer Service Enterprise**.
+        const welcomeText = `Halo! <i class="fas fa-hand-sparkles" style="color:var(--primary)"></i> Selamat datang di **OmniDesk AI**.
 
 Saya siap membantu Anda. Beberapa hal yang bisa saya lakukan:
 

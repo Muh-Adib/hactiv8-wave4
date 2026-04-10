@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Bootloader Engine
 async function bootSistem() {
-    logger.info("Memulai Aplikasi Server Chatbot CS Enterprise...");
+    logger.info("Memulai Server OmniDesk AI...");
     
     // 1. Ekstrak & Inject Modular Skills secara Dinamis
     await autoLoadSkills();

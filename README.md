@@ -1,6 +1,6 @@
-# CS Enterprise AI - Multi-Domain Chatbot
+# OmniDesk AI - Multi-Domain Agent
 
-**CS Enterprise AI** adalah aplikasi chatbot tingkat lanjut berbasis Node.js dan Google Gemini AI. Chatbot ini dirancang secara modular dan khusus dengan arsitektur *Multi-Domain Skill* agar asisten virtual Anda dapat melakukan aksi pintar secara dinamis *(Function Calling)* seperti mengecek stok gudang, pendaftaran pesanan, tracking resi kargo, dan reservasi meja restoran langsung dari prompt bahasa natural.
+**OmniDesk AI** adalah aplikasi chatbot tingkat lanjut berbasis Node.js dan Google Gemini AI. Chatbot ini dirancang secara modular dan khusus dengan arsitektur *Multi-Domain Skill* agar asisten virtual Anda dapat melakukan aksi pintar secara dinamis *(Function Calling)* seperti mengecek stok gudang, pendaftaran pesanan, tracking resi kargo, dan reservasi meja restoran langsung dari prompt bahasa natural.
 
 Dibuat secara komprehensif oleh **Muh. Adib (Hacktiv8 Wave 4)** dalam rangka eksplorasi mendalam terkait agen AI modular (*Agentic Framework*).
 
